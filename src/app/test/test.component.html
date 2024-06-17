@@ -1,9 +1,17 @@
-<table>
-  <tr>
-    <td *ngFor="let cell of cells" (cdkDropList)="onDrop($event)">
-      <div class="cell" cdkDropList [cdkDropListData]="cell.data" (cdkDropListDropped)="drop($event)">
-        <button cdkDrag (cdkDragEnded)="dragEnded($event)" [value]="cell.value">{{ cell.value }}</button>
-      </div>
-    </td>
-  </tr>
-</table>
+<!-- <div appSwipeTouch (swipeLeft)="onSwipeLeft()" (swipeRight)="onSwipeRight()" class="box">
+    <div class=" item" style="background-color: rgb(209, 178, 21);">a1</div>
+    <div class=" item" style="background-color: red;">a2</div>
+    <div class=" item" style="background-color: rgb(36, 146, 69);">a3</div>
+</div> -->
+
+
+<div class="slide-container">
+    <div class="slide-item" *ngFor="let item of listItem; index as i" [ngClass]=" {
+    'selected' : i === selectIndex,
+    'prev': i===selectIndex-1,
+    'next': i === selectIndex +1 ,
+    'hideLeft': i <selectIndex-1,
+    'hideRight': i > selectIndex + 1}">
+        <img [src]="item" alt="" class="slide-img" (swipeLeft)="(next(i))" (swipeRight)="(prev(i))">
+    </div>
+</div>
